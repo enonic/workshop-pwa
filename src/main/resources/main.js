@@ -1,5 +1,5 @@
 var mustacheLib = require('/lib/xp/mustache');
-var helper = require('/lib/helper');
+var helper = require('/js/helper');
 /*
 var router = require('/lib/router')();
 
