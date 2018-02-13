@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{title}}</title>
+
+    <link rel="apple-touch-icon" href="{{precacheUrl}}/icons/icon.png">
+    <link rel="icon" href="{{precacheUrl}}/icons/icon.png">
+
+<!--
+    2. IMPLEMENT WEB MANIFEST
+
+    <link rel="manifest" href="{{baseUrl}}/manifest.json">
+-->
+
+    <meta name="theme-color" content="{{themeColor}}">
+    <meta name="msapplication-TileColor" content="{{themeColor}}">
+    <meta name="Description" content="{{title}}">
+
+    <script type="text/javascript" src="{{precacheUrl}}/app.bundle.js" async></script>
+    <link rel="stylesheet" type="text/css" href="{{precacheUrl}}/app.bundle.css">
+
+    <script type="text/javascript" src="{{precacheUrl}}/js/material.min.js" async></script>
+    <link rel="stylesheet" type="text/css" href="{{precacheUrl}}/css/material.indigo-pink.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">{{title}}</span>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">{{title}} {{version}}</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="{{baseUrl}}"><b>Home</b></a>
+<!--            <a class="mdl-navigation__link" href="{{baseUrl}}/about">About</a> -->
+        </nav>
+    </div>
+
+    <main class="mdl-layout__content" id="main-content">
+        <div id="main-container">
+
+            <div id="page-content">
+                This is the Main page
+            </div>
+<!--
+
+            <img id="icon-online" class="icon-status" src="{{precacheUrl}}/icons/online.svg" alt="Online">
+            <img id="icon-offline" class="icon-status" src="{{precacheUrl}}/icons/offline.svg" alt="Offline">
+            <noscript>
+                <p id="js-disabled">Javascript is disabled. PWA features of this application are not available.</p>
+            </noscript>
+-->
+            <!-- Your content goes here -->
+        </div>
+
+    </main>
+    <footer id="notification-bar" class="mdl-js-snackbar mdl-snackbar" aria-hidden="true">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </footer>
+</div>
+<!--
+
+--== 4. IMPLEMENT SERVICE WORKER ==--
+
+<script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('{{baseUrl}}/sw.js', {scope: '{{appUrl}}'})
+            .then(function(reg) {
+                reg.onupdatefound = function() {
+                    notifyAboutNewVersion();
+                };
+                console.log('Service Worker registered with scope '  + reg.scope);
+            }, function() {
+                console.log('Service Worker registration failure.');
+            });
+    }
+
+    function showNotification() {
+        var snackbarContainer = document.querySelector('#notification-bar');
+        var data = {message: '{{title}} upgraded to the latest version'};
+        if (snackbarContainer.MaterialSnackbar) {
+            snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        }
+    }
+
+    function notifyAboutNewVersion() {
+        if (!("Notification" in window)) {
+            console.log('Notification API not supported.');
+            return;
+        }
+
+        // Let's check whether notification permissions have already been granted
+        if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            showNotification();
+        }
+
+        // Otherwise, we need to ask the user for permission
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+                // If the user accepts, let's create a notification
+                if (permission === "granted") {
+                    showNotification();
+                }
+            });
+        }
+    }
+</script>
+-->
+
+
+</body>
+</html>
