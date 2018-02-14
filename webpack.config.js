@@ -7,12 +7,12 @@ const extractTextPlugin = require('extract-text-webpack-plugin');
 const paths = {
     assets: 'src/main/resources/assets/',
     buildAssets: 'build/resources/main/assets/',
-    buildPwaLib: 'build/resources/main/lib/pwa/'
+    buildServiceWorker: 'build/resources/main/js/'
 };
 
 const assetsPath = path.join(__dirname, paths.assets);
 const buildAssetsPath = path.join(__dirname, paths.buildAssets);
-const buildPwaLibPath = path.join(__dirname, paths.buildPwaLib);
+const buildServiceWorkerPath = path.join(__dirname, paths.buildServiceWorker);
 
 module.exports = {
 
@@ -45,7 +45,7 @@ module.exports = {
 
         new workboxPlugin({
             swSrc: path.join(assetsPath, 'js/sw-dev.js'),
-            swDest: path.join(buildPwaLibPath, 'sw-template.js'),
+            swDest: path.join(buildServiceWorkerPath, 'sw.js'),
             globDirectory: buildAssetsPath,
             globPatterns: ['precache/**\/*'],
             globIgnores: [],
