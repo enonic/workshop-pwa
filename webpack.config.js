@@ -44,11 +44,11 @@ module.exports = {
         // 3. INSTALL WORKBOX
 
         new workboxPlugin({
+            swSrc: path.join(assetsPath, 'js/sw-dev.js'),
+            swDest: path.join(buildPwaLibPath, 'sw-template.js'),
             globDirectory: buildAssetsPath,
             globPatterns: ['precache/**\/*'],
             globIgnores: [],
-            swSrc: path.join(assetsPath, 'js/sw-dev.js'),
-            swDest: path.join(buildPwaLibPath, 'sw-template.js')
         })*/
     ]
 
