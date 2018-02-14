@@ -15,7 +15,7 @@ workboxSW.precache([
     '{{baseUrl}}/manifest.json',
     'https://fonts.googleapis.com/icon?family=Material+Icons'
 ]);
-
+/*
 workboxSW.router.setDefaultHandler({
     handler: workboxSW.strategies.cacheFirst()
 });
@@ -24,3 +24,4 @@ workboxSW.router.registerRoute(
     '{{baseUrl}}/about',
     workboxSW.strategies.networkFirst()
 );
+*/
