@@ -48,17 +48,10 @@ function renderManifest() {
     };
 }
 
-router.get('/', function() { return renderPage('main'); });
-router.get('/offline', function() { return renderPage('offline', 'Offline functionality'); });
-router.get('/push', function() { return renderPage('push', 'Push notifications'); });
-router.get('/cache-first', function() { return renderPage('cache-first', 'Cache First stragegy'); });
-router.get('/background-sync', function() { return renderPage('background-sync', 'Background syncing'); });
-router.get('/bluetooth', function() { return renderPage('bluetooth', 'Bluetooth functionality'); });
-router.get('/audio', function() { return renderPage('audio', 'Audio capabilities'); });
-router.get('/video', function() { return renderPage('video', 'Video capabilities'); });
-router.get('/webrtc', function() { return renderPage('webrtc', 'WebRTC functionality'); });
 router.get('/sw.js', renderSW);
 router.get('/manifest.json', renderManifest);
+
+router.get('/', function() { return renderPage('main'); });
 
 exports.get = function (req) {
     return router.dispatch(req);
