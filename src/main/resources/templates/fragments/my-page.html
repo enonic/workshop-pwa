@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div data-th-fragment="fragment-page-my-page" data-th-remove="tag">
+    <div class="online-content">
+        <img class="icon-status" data-th-src="${portal.assetUrl({'_path=icons/online.svg'})}" alt="Online">
+    </div>
+    <div class="offline-content">
+        <img class="icon-status" data-th-src="${portal.assetUrl({'_path=icons/offline.svg'})}" alt="Offline">
+    </div>
+    <div id="page-network-content">
+        Toggle network connection to see the effect
+    </div>
+    <div data-th-replace="/templates/fragments/common::fragment-no-javascript"></div>
+</div>
+
+</body>
+</html>

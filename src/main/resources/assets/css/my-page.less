@@ -1,0 +1,22 @@
+#main-container {
+
+  .online-content, .offline-content {
+    display: none;
+  }
+
+  .online .online-content,
+  .offline .offline-content {
+    display: block;
+  }
+
+  .icon-status {
+    max-width: 50%;
+    height: auto;
+  }
+
+  @media only screen and (min-width: 720px) {
+    .icon-status {
+      max-width: 30%;
+    }
+  }
+}
