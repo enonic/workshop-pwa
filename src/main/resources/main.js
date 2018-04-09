@@ -1,45 +1,65 @@
-var mustacheLib = require('/lib/xp/mustache');
-var helper = require('/js/helper');
-
-/*
+var thymeleaf = require('/lib/xp/thymeleaf');
 var router = require('/lib/router')();
-//var swController = require('/js/sw-controller');
+var portalLib = require('/lib/xp/portal');
+var siteTitle = 'PWA Workshop';
+var mustache = require('/lib/xp/mustache');
 
-var renderPage = function(pageName) {
-    return function() {
-        return {
-            body: mustacheLib.render(resolve('pages/' + pageName), {
-                title: 'My First PWA',
-                version: app.version,
-                appUrl: helper.getAppUrl(),
-                baseUrl: helper.getBaseUrl(),
-                precacheUrl: helper.getBaseUrl() + '/precache',
-                themeColor: '#FFF'
-            })
-        };
-    }
-};
+function getAppUrl() {
+    return portalLib.url({path:'/app/' + app.name}) + '/';
+}
 
-router.get('/', renderPage('main.html'));
+function renderPage(pageId, title) {
+    var model = {
+        version: app.version,
+        appUrl: getAppUrl(),
+        pageId: pageId,
+        title: title || siteTitle
+    };
 
-router.get('/about', renderPage('about.html'));
+    return {
+        body: thymeleaf.render(resolve('templates/page.html'), model)
+    };
+}
 
-//router.get('/sw.js', swController.get);
+
+function renderSW() {
+    var appUrl = getAppUrl();
+
+    return {
+        headers: {
+            'Service-Worker-Allowed': appUrl
+        },
+        contentType: 'application/javascript',
+        // sw.js will be generated during build by Workbox from webpack.config.js
+        body: mustache.render(resolve('/templates/sw.js'), {
+            appUrl: appUrl,
+            appVersion: app.version
+        })
+    };
+}
+
+function renderManifest() {
+
+    return {
+        contentType: 'application/json',
+        body: mustache.render(resolve('/templates/manifest.json'), {
+            startUrl: getAppUrl() + '?source=web_app_manifest'
+        })
+    };
+}
+
+router.get('/', function() { return renderPage('main'); });
+router.get('/offline', function() { return renderPage('offline', 'Offline functionality'); });
+router.get('/push', function() { return renderPage('push', 'Push notifications'); });
+router.get('/cache-first', function() { return renderPage('cache-first', 'Cache First stragegy'); });
+router.get('/background-sync', function() { return renderPage('background-sync', 'Background syncing'); });
+router.get('/bluetooth', function() { return renderPage('bluetooth', 'Bluetooth functionality'); });
+router.get('/audio', function() { return renderPage('audio', 'Audio capabilities'); });
+router.get('/video', function() { return renderPage('video', 'Video capabilities'); });
+router.get('/webrtc', function() { return renderPage('webrtc', 'WebRTC functionality'); });
+router.get('/sw.js', renderSW);
+router.get('/manifest.json', renderManifest);
 
 exports.get = function (req) {
     return router.dispatch(req);
-};
-*/
-exports.get = function (req) {
-
-    return {
-        body: mustacheLib.render(resolve('pages/main.html'), {
-            title: 'My First PWA',
-            version: app.version,
-            appUrl: helper.getAppUrl(),
-            baseUrl: helper.getBaseUrl(),
-            precacheUrl: helper.getBaseUrl() + '/precache',
-            themeColor: '#FFF'
-        })
-    }
 };

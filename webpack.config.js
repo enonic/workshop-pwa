@@ -1,26 +1,28 @@
 const path = require('path');
 const extractTextPlugin = require('extract-text-webpack-plugin');
-
-// 3. INSTALL WORKBOX
-// const workboxPlugin = require('workbox-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 
 const paths = {
+    templates: 'src/main/resources/templates/',
     assets: 'src/main/resources/assets/',
     buildAssets: 'build/resources/main/assets/',
-    buildServiceWorker: 'build/resources/main/js/'
+    buildTemplates: 'build/resources/main/templates/'
 };
 
+const templatesPath = path.join(__dirname, paths.templates);
 const assetsPath = path.join(__dirname, paths.assets);
 const buildAssetsPath = path.join(__dirname, paths.buildAssets);
-const buildServiceWorkerPath = path.join(__dirname, paths.buildServiceWorker);
+const buildTemplatesPath = path.join(__dirname, paths.buildTemplates);
 
 module.exports = {
 
-    entry: path.join(assetsPath, 'js/main.js'),
+    entry: path.join(assetsPath, 'js/app.js'),
 
     output: {
         path: buildAssetsPath,
-        filename: 'precache/app.bundle.js'
+        filename: 'precache/bundle.js',
+        libraryTarget: 'var',
+        library: 'Starter'
     },
 
     resolve: {
@@ -39,17 +41,13 @@ module.exports = {
         ]
     },
     plugins: [
-        new extractTextPlugin('precache/app.bundle.css')/*,
-
-        // 3. INSTALL WORKBOX
-
+        new extractTextPlugin('precache/bundle.css'),
         new workboxPlugin({
-            swSrc: path.join(assetsPath, 'js/sw-dev.js'),
-            swDest: path.join(buildServiceWorkerPath, 'sw.js'),
             globDirectory: buildAssetsPath,
             globPatterns: ['precache/**\/*'],
-            globIgnores: [],
-        })*/
+            swSrc: path.join(templatesPath, 'workbox-sw.js'),
+            swDest: path.join(buildTemplatesPath, 'sw.js')
+        })
     ]
 
 };
