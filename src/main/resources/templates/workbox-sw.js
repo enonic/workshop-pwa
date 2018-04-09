@@ -16,8 +16,6 @@ workboxSW.precache([
     '{{appUrl}}manifest.json'
 ]);
 
-workboxSW.router.registerRoute('{{appUrl}}', workboxSW.strategies.networkFirst());
-
 workboxSW.router.setDefaultHandler({
     handler: workboxSW.strategies.networkFirst()
 });
