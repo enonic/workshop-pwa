@@ -1,4 +1,4 @@
-importScripts('{{appUrl}}js/workbox-sw.prod.v2.0.1.js');
+importScripts('{{assetUrl}}/js/workbox-sw.prod.v2.0.1.js');
 
 const swVersion = '{{appVersion}}';
 const workboxSW = new self.WorkboxSW({
@@ -13,6 +13,8 @@ workboxSW.precache([]);
 workboxSW.precache([
     '{{appUrl}}'
 ]);
+
+workboxSW.router.registerRoute('{{appUrl}}', workboxSW.strategies.networkFirst());
 
 workboxSW.router.setDefaultHandler({
     handler: workboxSW.strategies.networkFirst()
