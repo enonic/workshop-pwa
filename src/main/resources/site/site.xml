@@ -6,7 +6,7 @@
       <occurrences minimum="0" maximum="1"/>
       <config>
         <option value="white">White</option>
-        <option value="grey">Grey</option>
+        <option value="green">Green</option>
         <option value="blue">Blue</option>
         <option value="red">Red</option>
       </config>

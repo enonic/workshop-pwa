@@ -6,8 +6,8 @@ function getBgColor() {
     var siteConfig = portal.getSiteConfig();
     var bgColor;
     switch (siteConfig.backgroundColor) {
-    case 'grey':
-        bgColor = '#EEEEEE';
+    case 'green':
+        bgColor = '#5beea2';
         break;
     case 'white':
         bgColor = '#FFFFFF';
