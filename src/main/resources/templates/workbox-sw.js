@@ -11,7 +11,6 @@ workboxSW.precache([]);
 
 // Here we precache custom defined Urls
 workboxSW.precache([
-    '{{appUrl}}',
     '{{appUrl}}?source=web_app_manifest',
     '{{appUrl}}manifest.json'
 ]);
