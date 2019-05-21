@@ -1,6 +1,7 @@
 const path = require('path');
-const extractTextPlugin = require('extract-text-webpack-plugin');
-const workboxPlugin = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const InjectManifest = require('workbox-webpack-plugin').InjectManifest;
 
 const paths = {
     templates: 'src/main/resources/templates/',
@@ -33,21 +34,26 @@ module.exports = {
         rules: [
             {
                 test: /.less$/,
-                loader: extractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: "css-loader!less-loader"
-                })
+                use: [
+                    {loader: MiniCssExtractPlugin.loader, options: {publicPath: '../', hmr: false}},
+                    {loader: 'css-loader', options: {sourceMap: true, importLoaders: 1}},
+                    {loader: 'less-loader', options: {sourceMap: true}},
+                ]
             }
         ]
     },
     plugins: [
-        new extractTextPlugin('precache/bundle.css'),
-        new workboxPlugin({
+        new MiniCssExtractPlugin({
+            filename: 'precache/bundle.css'
+        }),
+        new InjectManifest({
             globDirectory: buildAssetsPath,
-            globPatterns: ['precache/**\/*'],
+            globPatterns: ['precache/**/*.*'],
             swSrc: path.join(templatesPath, 'workbox-sw.js'),
             swDest: path.join(buildTemplatesPath, 'sw.js')
         })
-    ]
+    ],
+    mode: 'development',
+    devtool: 'source-map'
 
 };

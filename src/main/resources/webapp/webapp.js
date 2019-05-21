@@ -1,11 +1,11 @@
-var thymeleaf = require('/lib/xp/thymeleaf');
-var router = require('/lib/router')();
 var portalLib = require('/lib/xp/portal');
+var thymeleaf = require('/lib/thymeleaf');
+var router = require('/lib/router')();
+var mustache = require('/lib/mustache');
 var siteTitle = 'PWA Workshop';
-var mustache = require('/lib/xp/mustache');
 
 function getAppUrl() {
-    return portalLib.url({path:'/app/' + app.name}) + '/';
+    return portalLib.url({path:'/webapp/' + app.name}) + '/';
 }
 
 function renderPage(pageId, title) {
@@ -17,7 +17,7 @@ function renderPage(pageId, title) {
     };
 
     return {
-        body: thymeleaf.render(resolve('templates/page.html'), model)
+        body: thymeleaf.render(resolve('/templates/page.html'), model)
     };
 }
 

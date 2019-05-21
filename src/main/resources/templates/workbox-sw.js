@@ -1,19 +1,22 @@
-importScripts('{{appUrl}}js/workbox-sw.prod.v2.0.1.js');
-
-const swVersion = '{{appVersion}}';
-const workboxSW = new self.WorkboxSW({
-    skipWaiting: true,
-    clientsClaim: true
+workbox.core.setCacheNameDetails({
+    prefix: 'enonic-pwa-workshop',
+    suffix: '{{appVersion}}',
+    precache: 'precache',
+    runtime: 'runtime'
 });
+
+workbox.core.clientsClaim();
 
 // This is a placeholder for manifest dynamically injected from webpack.config.js
-workboxSW.precache([]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // Here we precache custom defined Urls
-workboxSW.precache([
-    '{{appUrl}}'
-]);
+workbox.precaching.precacheAndRoute([{
+    "revision": "{{appVersion}}",
+    "url": "{{appUrl}}"
+},{
+    "revision": "{{appVersion}}",
+    "url": "{{appUrl}}manifest.json"
+}]);
 
-workboxSW.router.setDefaultHandler({
-    handler: workboxSW.strategies.networkFirst()
-});
+workbox.routing.setDefaultHandler(new workbox.strategies.NetworkFirst());
