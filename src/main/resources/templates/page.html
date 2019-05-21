@@ -42,7 +42,7 @@
 
     <div data-th-replace="/templates/fragments/common::fragment-site-menu(title=${title}, pageId=${pageId}, appUrl=${appUrl})"></div>
 
-    <main class="mdl-layout__content" id="main-content">
+    <main class="mdl-layout__content" id="main-content" data-th-style="${bgColor} ? ${'background-color: ' + bgColor} : ''">
         <div id="main-container" data-th-switch="${pageId}">
 
             <div data-th-case="'main'" data-th-remove="tag">
@@ -57,7 +57,7 @@
     </footer>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" data-th-if="${isLive}">
     const registerServiceWorker = function(appUrl) {
 
         if ('serviceWorker' in navigator) {
@@ -75,7 +75,7 @@
     }
 </script>
 
-<!--<script type="text/javascript" data-th-utext="'registerServiceWorker(\'' + ${appUrl} + '\');'"></script>-->
+<script type="text/javascript" data-th-if="${isLive}" data-th-utext="'registerServiceWorker(\'' + ${appUrl} + '\');'"></script>
 
 </body>
 </html>

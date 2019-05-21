@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <config>
+    <input name="backgroundColor" type="RadioButton">
+      <label>Page background</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config>
+        <option value="white">White</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+      </config>
+    </input>
+  </config>
+
+  <mappings>
+    <mapping controller="/lib/sw-controller.js">
+      <pattern>/sw.js</pattern>
+    </mapping>
+    <mapping controller="/lib/manifest-controller.js">
+      <pattern>/manifest.json</pattern>
+    </mapping>
+    <mapping controller="/lib/assets-controller.js">
+      <pattern>/precache/.*</pattern>
+    </mapping>
+  </mappings>
+</site>

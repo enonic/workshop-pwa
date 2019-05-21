@@ -13,14 +13,14 @@ function renderPage(pageId, title) {
         version: app.version,
         appUrl: getAppUrl(),
         pageId: pageId,
-        title: title || siteTitle
+        title: title || siteTitle,
+        isLive: true
     };
 
     return {
         body: thymeleaf.render(resolve('/templates/page.html'), model)
     };
 }
-
 
 function renderSW() {
     var appUrl = getAppUrl();
@@ -33,6 +33,7 @@ function renderSW() {
         // sw.js will be generated during build by Workbox from webpack.config.js
         body: mustache.render(resolve('/templates/sw.js'), {
             appUrl: appUrl,
+            assetUrl: portalLib.assetUrl({path: ''}),
             appVersion: app.version
         })
     };
