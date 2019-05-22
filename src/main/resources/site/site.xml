@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <config>
+  <form>
     <input name="backgroundColor" type="RadioButton">
       <label>Page background</label>
       <occurrences minimum="0" maximum="1"/>
@@ -11,7 +11,7 @@
         <option value="red">Red</option>
       </config>
     </input>
-  </config>
+  </form>
 
   <mappings>
     <mapping controller="/lib/sw-controller.js">
