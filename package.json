@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/enonic/starter-pwa#readme",
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^2.1.1",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",

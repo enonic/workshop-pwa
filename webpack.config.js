@@ -1,7 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const InjectManifest = require('workbox-webpack-plugin').InjectManifest;
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const paths = {
     templates: 'src/main/resources/templates/',
@@ -35,25 +35,28 @@ module.exports = {
             {
                 test: /.less$/,
                 use: [
-                    {loader: MiniCssExtractPlugin.loader, options: {publicPath: '../', hmr: false}},
-                    {loader: 'css-loader', options: {sourceMap: true, importLoaders: 1}},
-                    {loader: 'less-loader', options: {sourceMap: true}},
+                    {loader: MiniCssExtractPlugin.loader, options: {publicPath: '../', hmr: true}},
+                    {loader: 'css-loader', options: {sourceMap: false, importLoaders: 1}},
+                    {loader: 'less-loader', options: {sourceMap: false}},
                 ]
             }
         ]
     },
     plugins: [
+        new CleanWebpackPlugin([
+            path.join(buildAssetsPath, 'precache-manifest*.*'),
+            path.join(buildAssetsPath, 'precache/bundle.*')
+        ]),
         new MiniCssExtractPlugin({
             filename: 'precache/bundle.css'
         }),
         new InjectManifest({
             globDirectory: buildAssetsPath,
-            globPatterns: ['precache/**/*.*'],
+            globPatterns: ['precache/**\/*'],
             swSrc: path.join(templatesPath, 'workbox-sw.js'),
             swDest: path.join(buildTemplatesPath, 'sw.js')
         })
     ],
-    mode: 'development',
-    devtool: 'source-map'
+    mode: 'production'
 
 };
