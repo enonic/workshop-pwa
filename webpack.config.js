@@ -54,7 +54,8 @@ module.exports = {
             globDirectory: buildAssetsPath,
             globPatterns: ['precache/**\/*'],
             swSrc: path.join(templatesPath, 'workbox-sw.js'),
-            swDest: path.join(buildTemplatesPath, 'sw.js')
+            swDest: path.join(buildTemplatesPath, 'sw.js'),
+            importsDirectory: path.join(buildAssetsPath, 'precache'),
         })
     ],
     mode: 'production'

@@ -1,5 +1,5 @@
 var portal = require('/lib/xp/portal');
-var mustache = require('/lib/xp/mustache');
+var mustache = require('/lib/mustache');
 var view = resolve('../templates/manifest.json');
 
 function getSiteUrl() {

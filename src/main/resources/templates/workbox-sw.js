@@ -14,9 +14,6 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 // Here we precache custom defined Urls
 workbox.precaching.precacheAndRoute([{
     "revision": "{{appVersion}}",
-    "url": "{{appUrl}}"
-},{
-    "revision": "{{appVersion}}",
     "url": "{{appUrl}}manifest.json"
 }]);
 

@@ -17,6 +17,7 @@ node {
 }
 
 dependencies {
+    include "com.enonic.xp:lib-io:${xpVersion}"
     include "com.enonic.xp:lib-portal:${xpVersion}"
     include "com.enonic.lib:lib-mustache:2.0.0"
     include "com.enonic.lib:lib-thymeleaf:2.0.0"

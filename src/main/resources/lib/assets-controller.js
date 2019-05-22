@@ -12,6 +12,9 @@ var getMimeType = function (path) {
 exports.get = function (req) {
 
     var assetPath = req.url.slice(req.url.indexOf('/precache'));
+    if (assetPath.indexOf('?__WB_REVISION') > 0) {
+        assetPath = assetPath.split('?__WB_REVISION')[0];
+    }
     var fullPath = '../assets' + assetPath;
 
     return {
