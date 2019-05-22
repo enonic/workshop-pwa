@@ -53,7 +53,6 @@ router.get('/sw.js', renderSW);
 router.get('/manifest.json', renderManifest);
 
 router.get('/', function() { return renderPage('main'); });
-router.get('/{path:.+}', function() { return renderPage('fallback', 'Under construction'); });
 
 exports.get = function (req) {
     return router.dispatch(req);

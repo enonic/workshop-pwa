@@ -6,6 +6,7 @@ workbox.core.setCacheNameDetails({
 });
 
 workbox.core.clientsClaim();
+workbox.core.skipWaiting();
 
 // This is a placeholder for manifest dynamically injected from webpack.config.js
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
